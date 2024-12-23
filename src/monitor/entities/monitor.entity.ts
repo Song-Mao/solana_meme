@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } from 'typeorm';
-import { Wallet } from './wallet.entity';
+import { Wallet } from '../wallet/entities/wallet.entity';
 
 @Entity()
 export class Monitor {
@@ -9,9 +9,24 @@ export class Monitor {
     @Column()
     tokenAddress: string;
 
-    @OneToMany(() => Wallet, wallet => wallet.monitor, { cascade: true })
-    wallets: Wallet[];
+    @Column({ nullable: true })
+    tokenName: string;
+
+    @Column({ nullable: true })
+    tokenSymbol: string;
+
+    @Column({ nullable: true })
+    tokenIcon: string;
 
     @CreateDateColumn()
     createdAt: Date;
+
+    @OneToMany(() => Wallet, (wallet: Wallet) => wallet.monitor)
+    wallets: Wallet[];
+
+    @Column()
+    usdtAddress: string;
+
+    @Column()
+    usdcAddress: string;
 }

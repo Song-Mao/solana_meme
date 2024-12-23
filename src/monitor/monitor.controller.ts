@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Query, BadRequestException } from '@nestjs/common';
 import { MonitorService } from './monitor.service';
 import { CreateMonitorDto } from './dto/create-monitor.dto';
 import { MonitorListItemDto } from './dto/monitor-list-item.dto';
@@ -19,7 +19,7 @@ export class MonitorController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<MonitorDetailDto> {
-    return await this.monitorService.findOne(id);
+  findOne(@Param('id') id: string) {
+    return this.monitorService.findOne(id);
   }
 }

@@ -1,20 +1,38 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Monitor } from '../../entities/monitor.entity';
 
 @Entity()
 export class Wallet {
     @PrimaryGeneratedColumn('uuid')
-    id: string;
+    id!: string;
 
     @Column()
-    address: string;
+    address!: string;
 
     @Column()
-    note: string;
+    note!: string;
 
-    @Column({ type: 'decimal', precision: 65, scale: 0, default: '0' })
-    balance: string;
+    @Column('text', { nullable: true })
+    tokenBalance!: string;
+
+    @Column('text', { nullable: true })
+    lastTokenBalance!: string;
+
+    @Column('text', { nullable: true })
+    tokenBalanceChange!: string;
+
+    @Column('text', { nullable: true })
+    solBalance!: string;
+
+    @Column('text', { nullable: true })
+    solValueInUsdt!: string;
+
+    @Column('text', { nullable: true })
+    usdtBalance!: string;
+
+    @Column('text', { nullable: true })
+    usdcBalance!: string;
 
     @ManyToOne(() => Monitor, monitor => monitor.wallets)
-    monitor: Monitor;
+    monitor!: Monitor;
 } 
